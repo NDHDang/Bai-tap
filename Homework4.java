@@ -1,32 +1,32 @@
 
 package homework4;
-import java.util.Random;
-import java.util.Scanner;
-public class Homework4 {
-
+import java.util.*;
+public class Homework4{
     public static void main(String[] args) {
-    Random random = new Random();
-        int lotteryNumber = random.nextInt(100) + 1; // Sinh số ngẫu nhiên từ 1 đến 100
-        Scanner scanner = new Scanner(System.in);
-        int userGuess = 0;
-
-        System.out.println("Chao mung den voi chuong trinh xo so!");
-        System.out.println("Hay doan so tu 1 den 100:");
-
-        while (userGuess != lotteryNumber) {
-            System.out.print("Nhap so cua ban: ");
-            userGuess = scanner.nextInt();
-
-            if (userGuess < lotteryNumber) {
-                System.out.println("So ban doan thap hon so xo so.");
-            } else if (userGuess > lotteryNumber) {
-                System.out.println("So ban doan cao hon so xo so.");
+        Scanner console = new Scanner(System.in);
+        Random rand = new Random();
+        // play until user gets 3 wrong
+        int points = 0;
+        int wrong = 0;
+        while (wrong < 3) {
+            int result = play(console, rand); //play one game
+            if (result > 0) {
+                points++;
             } else {
-                System.out.println("Chuc mung! Ban da doan dung so: " + lotteryNumber);
+                wrong++;
             }
         }
-
-        scanner.close();
+        System.out.println("You earned " + points + " total points.");
     }
-    
+    public static int play(Scanner console, Random rand) {
+        int num1 = rand.nextInt(10);
+        int num2 = rand.nextInt(10);
+        System.out.println(num1 + " + " + num2 + " = ");
+        int result = console.nextInt();
+        if (result == num1 + num2) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
